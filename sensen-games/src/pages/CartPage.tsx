@@ -22,7 +22,7 @@ export function CartPage() {
             </p>
             <Link
               to="/catalogo"
-              className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 btn-primary px-6 py-3 rounded-lg transition-colors"
             >
               Explorar Catálogo
               <ArrowRight className="w-5 h-5" />
@@ -90,7 +90,7 @@ export function CartPage() {
                   {item.genre.slice(0, 2).map((g: string) => (
                   <span
                     key={g}
-                    className="text-xs bg-violet-600/20 text-violet-300 px-2 py-1 rounded"
+                    className="text-xs badge-primary-soft text-primary px-2 py-1 rounded"
                   >
                     {g}
                   </span>
@@ -161,7 +161,7 @@ export function CartPage() {
                 </div>
               </div>
 
-              <button className="w-full bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg transition-colors mb-3">
+              <button className="w-full btn-primary px-6 py-3 rounded-lg transition-colors mb-3">
                 Finalizar Compra
               </button>
 

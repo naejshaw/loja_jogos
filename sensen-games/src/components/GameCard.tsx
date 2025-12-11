@@ -35,7 +35,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
 
   return (
     <div
-      className="group relative m-1 cursor-pointer overflow-hidden rounded-lg shadow-lg aspect-video"
+      className="group relative m-1 cursor-pointer overflow-hidden rounded-lg shadow-lg aspect-video bg-general"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
@@ -58,7 +58,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
         </>
       )}
       <div className={`absolute inset-0 bg-black bg-opacity-75 opacity-0 transition-opacity ${hasVideo && 'group-hover:opacity-100 group-hover:bg-opacity-5'} flex items-center justify-center`}>
-        <h3 className="text-center text-2xl font-bold text-white">{game.title}</h3>
+        <h3 className="text-center text-2xl font-bold text-general">{game.title}</h3>
       </div>
     </div>
   );

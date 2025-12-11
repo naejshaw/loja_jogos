@@ -23,7 +23,7 @@ export function WishlistPage() {
             </p>
             <Link
               to="/catalogo"
-              className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 btn-primary px-6 py-3 rounded-lg transition-colors"
             >
               Explorar Catálogo
               <ArrowRight className="w-5 h-5" />
@@ -99,7 +99,7 @@ export function WishlistPage() {
                 {game.genre.slice(0, 2).map((g: string) => (
                 <span
                   key={g}
-                  className="text-xs bg-violet-600/20 text-violet-300 px-2 py-1 rounded"
+                  className="text-xs badge-primary-soft text-primary px-2 py-1 rounded"
                 >
                   {g}
                 </span>
@@ -113,7 +113,7 @@ export function WishlistPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded transition-colors ${
                   isInCart(game)
                   ? 'bg-green-600 hover:bg-green-700 text-white'
-                  : 'bg-violet-600 hover:bg-violet-700 text-white'
+                  : 'btn-primary'
                 }`}
                 >
                 <ShoppingCart className="w-4 h-4" />

@@ -47,7 +47,7 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900 border-slate-700 text-slate-100">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-general border-slate-700 text-general">
         <DialogHeader>
           <DialogTitle className="text-2xl text-violet-300">
             {game.title}
@@ -134,7 +134,7 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
               {game.genre.map((g) => (
                 <span
                   key={g}
-                  className="bg-violet-600/20 text-violet-300 px-3 py-1 rounded-full text-sm"
+                  className="badge-primary-soft text-primary px-3 py-1 rounded-full text-sm"
                 >
                   {g}
                 </span>
@@ -207,7 +207,7 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
               className={`flex-1 px-6 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 ${
                 inCart
                   ? 'bg-green-600 hover:bg-green-700 text-white'
-                  : 'bg-violet-600 hover:bg-violet-700 text-white'
+                  : 'btn-primary'
               }`}
             >
               <ShoppingCart className="w-5 h-5" />

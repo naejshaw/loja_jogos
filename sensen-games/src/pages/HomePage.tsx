@@ -76,7 +76,7 @@ const HomePage = () => {
         <div className="relative z-10 text-center">
           <h1 className="text-5xl font-bold">{settings?.homepageTitle || currentGame.title}</h1>
           <Link to={`/games/${currentGame.slug}`}>
-            <button className="mt-8 bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+            <button className="mt-8 btn-primary font-bold py-3 px-8 rounded-lg transition-colors">
               JOGUE AGORA
             </button>
           </Link>
@@ -124,7 +124,7 @@ const HomePage = () => {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-slate-900 border border-slate-800 rounded-lg p-6 hover:border-violet-600 transition-colors">
+            <div className="bg-general border border-slate-800 rounded-lg p-6 hover:border-violet-600 transition-colors">
               <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4">
                 <Sparkles className="w-6 h-6 text-violet-400" />
               </div>
@@ -134,7 +134,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-lg p-6 hover:border-violet-600 transition-colors">
+            <div className="bg-general border border-slate-800 rounded-lg p-6 hover:border-violet-600 transition-colors">
               <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-violet-400" />
               </div>
@@ -144,7 +144,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-lg p-6 hover:border-violet-600 transition-colors">
+            <div className="bg-general border border-slate-800 rounded-lg p-6 hover:border-violet-600 transition-colors">
               <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4">
                 <Trophy className="w-6 h-6 text-violet-400" />
               </div>
@@ -183,7 +183,7 @@ const HomePage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/catalogo"
-              className="bg-violet-600 hover:bg-violet-700 text-white px-8 py-3 rounded-lg transition-colors"
+              className="btn-primary px-8 py-3 rounded-lg transition-colors"
             >
               Ver Catálogo
             </Link>

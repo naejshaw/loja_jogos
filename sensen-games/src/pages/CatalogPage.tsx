@@ -119,7 +119,7 @@ const CatalogPage = () => {
                   {game.genre.map((g) => (
                     <span
                       key={g}
-                      className="text-xs bg-violet-600/20 text-violet-300 px-2 py-1 rounded"
+                      className="text-xs badge-primary-soft text-primary px-2 py-1 rounded"
                     >
                       {g}
                     </span>
@@ -129,7 +129,7 @@ const CatalogPage = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-violet-400">{`R$ ${game.price.toFixed(2).replace('.', ',')}`}</span>
                   <button 
-                    className="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded transition-colors"
+                    className="btn-primary px-4 py-2 rounded transition-colors"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleGameClick(game);

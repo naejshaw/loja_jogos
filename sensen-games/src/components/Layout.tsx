@@ -4,6 +4,7 @@ import { Gamepad2, Menu, X, ShoppingCart, Heart } from 'lucide-react';
 import Footer from './Footer';
 import { useState } from 'react';
 import { useStore } from '../contexts/useStore';
+import { useSettings } from '../context/SettingsContext';
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,6 +14,7 @@ export function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { getCartCount, wishlist } = useStore();
+  const { settings } = useSettings();
 
   const navigation = [
     { name: 'Início', href: '/' },
@@ -26,7 +28,7 @@ export function Layout({ children }: LayoutProps) {
   const wishlistCount = wishlist.length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-general text-general font-site">
       {/* Header */}
       <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +36,7 @@ export function Layout({ children }: LayoutProps) {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 transition-colors">
               <Gamepad2 className="w-8 h-8" />
-              <span className="text-xl">IndieVerse</span>
+              <span className="text-xl">{settings?.siteName ?? 'IndieVerse'}</span>
             </Link>
 
             {/* Desktop Navigation */}
