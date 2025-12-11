@@ -1,0 +1,12 @@
+html {
+  background-color: var(--general-background-color);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family); /* Apply dynamic font family */
+  background-color: var(--page-background-color);
+  color: var(--general-text-color); /* Ensure body also respects general text color */
+}
