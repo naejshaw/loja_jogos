@@ -35,7 +35,15 @@ export function Layout({ children }: LayoutProps) {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 transition-colors">
-              <Gamepad2 className="w-8 h-8" />
+              {settings?.logoUrl ? (
+                <img
+                  src={settings.logoUrl.startsWith('/') ? `http://localhost:3001${settings.logoUrl}` : settings.logoUrl}
+                  alt={settings?.siteName ?? 'IndieVerse'}
+                  className="h-8 w-8 rounded-full object-cover"
+                />
+              ) : (
+                <Gamepad2 className="w-8 h-8" />
+              )}
               <span className="text-xl">{settings?.siteName ?? 'IndieVerse'}</span>
             </Link>
 
