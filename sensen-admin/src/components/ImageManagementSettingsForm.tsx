@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { Box, Typography, Button, Stack, Avatar, CircularProgress, Alert } from '@mui/material';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
@@ -9,7 +8,6 @@ interface ImageManagementSettingsFormProps {
   settings: SiteSettings;
   setSettings: React.Dispatch<React.SetStateAction<SiteSettings>>;
   apiClient: AxiosInstance;
-  feedback: { message: string; severity: 'success' | 'error' } | null;
   setFeedback: React.Dispatch<React.SetStateAction<{ message: string; severity: 'success' | 'error' } | null>>;
 }
 
@@ -17,7 +15,6 @@ const ImageManagementSettingsForm: React.FC<ImageManagementSettingsFormProps> = 
   settings,
   setSettings,
   apiClient,
-  feedback,
   setFeedback,
 }) => {
   const [selectedFileLogo, setSelectedFileLogo] = useState<File | null>(null);

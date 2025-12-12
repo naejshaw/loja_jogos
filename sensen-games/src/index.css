@@ -27,7 +27,21 @@
 .btn-primary:hover { filter: brightness(.9); }
 
 .badge-primary { background-color: var(--primary-color); color: var(--primary-on-color, #fff); }
-.badge-primary-soft { background-color: var(--primary-color); opacity: 0.18; color: var(--primary-on-color, #fff); }
+/* Soft badge: draw a low-opacity background via a ::before pseudo-element
+	 so the text remains fully opaque. This preserves dynamic --primary-color. */
+.badge-primary-soft {
+	position: relative;
+	color: var(--primary-on-color, #fff) !important;
+}
+.badge-primary-soft::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-color: var(--primary-color);
+	opacity: 0.18;
+	border-radius: inherit;
+	z-index: -1;
+}
 
 /* small helpers to keep spacing consistent when using css classes */
 .container-padded { padding-left: 1rem; padding-right: 1rem; }

@@ -6,18 +6,18 @@ import { useStore } from '../contexts/useStore';
 export function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useStore();
 
-  const formatPrice = (price: number) => price;
+  const formatPrice = (price: number) => `R$ ${price.toFixed(2).replace('.', ',')}`;
 
   const total = getCartTotal();
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen page-bg text-general py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center py-16">
-            <ShoppingCart className="w-24 h-24 mx-auto mb-6 text-slate-700" />
-            <h2 className="text-3xl mb-4 text-slate-300">Seu carrinho está vazio</h2>
-            <p className="text-slate-400 mb-8">
+            <ShoppingCart className="w-24 h-24 mx-auto mb-6 text-primary" />
+            <h2 className="text-3xl mb-4 text-general">Seu carrinho está vazio</h2>
+            <p className="text-general mb-8">
               Adicione alguns jogos incríveis ao seu carrinho!
             </p>
             <Link
@@ -34,13 +34,13 @@ export function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen page-bg text-general py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl mb-4 text-violet-300">Carrinho de Compras</h1>
+          <h1 className="text-4xl mb-4 text-primary">Carrinho de Compras</h1>
           <div className="flex justify-between items-center">
-            <p className="text-slate-300">
+            <p className="text-general">
               {cart.length} {cart.length === 1 ? 'item' : 'itens'} no carrinho
             </p>
             <button
@@ -58,11 +58,11 @@ export function CartPage() {
             {cart.map((item: typeof cart[number]) => (
               <div
               key={item.id}
-              className="bg-slate-900 border border-slate-800 rounded-lg p-4 hover:border-violet-600/50 transition-colors"
+              className="bg-general border border-slate-800 rounded-lg p-4 hover:border-violet-600/50 transition-colors"
               >
               <div className="flex gap-4">
                 {/* Image */}
-                <div className="w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden bg-slate-800">
+                <div className="w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden bg-general">
                 <ImageWithFallback
                   src={item.image}
                   alt={item.title}
@@ -74,8 +74,8 @@ export function CartPage() {
                 <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-start mb-2">
                   <div>
-                  <h3 className="text-xl text-slate-100 mb-1">{item.title}</h3>
-                  <p className="text-sm text-slate-400">{item.developer}</p>
+                  <h3 className="text-xl text-general mb-1">{item.title}</h3>
+                  <p className="text-sm text-general">{item.developer}</p>
                   </div>
                   <button
                   onClick={() => removeFromCart(item.id!)}
@@ -102,17 +102,17 @@ export function CartPage() {
                   <div className="flex items-center gap-2">
                   <button
                     onClick={() => updateQuantity(item.id!, item.quantity - 1)}
-                    className="bg-slate-800 hover:bg-slate-700 text-slate-100 p-2 rounded transition-colors"
+                    className="bg-general hover:border-violet-600 text-general p-2 rounded transition-colors"
                     disabled={item.quantity <= 1}
                   >
                     <Minus className="w-4 h-4" />
                   </button>
-                  <span className="text-slate-100 w-8 text-center">
+                  <span className="text-general w-8 text-center">
                     {item.quantity}
                   </span>
                   <button
                     onClick={() => updateQuantity(item.id!, item.quantity + 1)}
-                    className="bg-slate-800 hover:bg-slate-700 text-slate-100 p-2 rounded transition-colors"
+                    className="bg-general hover:border-violet-600 text-general p-2 rounded transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
@@ -136,16 +136,16 @@ export function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-900 border border-slate-800 rounded-lg p-6 sticky top-24">
-              <h2 className="text-2xl mb-6 text-slate-100">Resumo do Pedido</h2>
+            <div className="bg-general border border-slate-800 rounded-lg p-6 sticky top-24">
+              <h2 className="text-2xl mb-6 text-general">Resumo do Pedido</h2>
 
               <div className="space-y-3 mb-6">
                 {cart.map((item: typeof cart[number]) => (
                   <div key={item.id} className="flex justify-between text-sm">
-                  <span className="text-slate-400">
+                  <span className="text-general">
                     {item.title} x{item.quantity}
                   </span>
-                  <span className="text-slate-300">
+                  <span className="text-general">
                     R$ {((item.price as number) * item.quantity).toFixed(2).replace('.', ',')}
                   </span>
                   </div>
@@ -154,7 +154,7 @@ export function CartPage() {
 
               <div className="border-t border-slate-800 pt-4 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-100">Total</span>
+                  <span className="text-general">Total</span>
                   <span className="text-2xl text-violet-400">
                     R$ {total.toFixed(2).replace('.', ',')}
                   </span>

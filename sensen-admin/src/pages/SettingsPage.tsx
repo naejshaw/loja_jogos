@@ -155,7 +155,7 @@ const SettingsPage: React.FC = () => {
     setSettings((prevSettings) => ({ ...prevSettings, [name as string]: value }));
   };
   
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
 
@@ -229,7 +229,6 @@ const SettingsPage: React.FC = () => {
             settings={settings}
             setSettings={setSettings}
             apiClient={apiClient}
-            feedback={feedback}
             setFeedback={setFeedback}
           />
         )}

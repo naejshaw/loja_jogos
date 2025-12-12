@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Gamepad2, Menu, X, ShoppingCart, Heart } from 'lucide-react';
+import { Gamepad2, Menu, X, ShoppingCart, Heart, ArrowUp } from 'lucide-react'; // Import ArrowUp
 import Footer from './Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Ensure useEffect is imported
 import { useStore } from '../contexts/useStore';
 import { useSettings } from '../context/SettingsContext';
+import { resolveMedia } from '../utils/media';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false); // State for scroll to top button
   const location = useLocation();
   const { getCartCount, wishlist } = useStore();
   const { settings } = useSettings();
@@ -27,17 +29,39 @@ export function Layout({ children }: LayoutProps) {
   const cartCount = getCartCount();
   const wishlistCount = wishlist.length;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) { // Show button after scrolling 300px
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-general text-general font-site">
       {/* Header */}
-      <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+      <header className="header-bg border-b border-slate-800 sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 transition-colors">
               {settings?.logoUrl ? (
                 <img
-                  src={settings.logoUrl.startsWith('/') ? `http://localhost:3001${settings.logoUrl}` : settings.logoUrl}
+                  src={resolveMedia(settings.logoUrl)}
                   alt={settings?.siteName ?? 'IndieVerse'}
                   className="h-8 w-8 rounded-full object-cover"
                 />
@@ -56,7 +80,7 @@ export function Layout({ children }: LayoutProps) {
                   className={`transition-colors ${
                     isActive(item.href)
                       ? 'text-violet-400'
-                      : 'text-slate-300 hover:text-violet-400'
+                      : 'text-general hover:text-violet-400'
                   }`}
                 >
                   {item.name}
@@ -66,7 +90,7 @@ export function Layout({ children }: LayoutProps) {
               {/* Wishlist Icon */}
               <Link
                 to="/lista-desejos"
-                className="relative text-slate-300 hover:text-violet-400 transition-colors"
+                className="relative text-general hover:text-violet-400 transition-colors"
                 title="Lista de Desejos"
               >
                 <Heart className={`w-6 h-6 ${isActive('/lista-desejos') ? 'text-violet-400 fill-current' : ''}`} />
@@ -80,7 +104,7 @@ export function Layout({ children }: LayoutProps) {
               {/* Cart Icon */}
               <Link
                 to="/carrinho"
-                className="relative text-slate-300 hover:text-violet-400 transition-colors"
+                className="relative text-general hover:text-violet-400 transition-colors"
                 title="Carrinho"
               >
                 <ShoppingCart className={`w-6 h-6 ${isActive('/carrinho') ? 'text-violet-400' : ''}`} />
@@ -94,7 +118,7 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-slate-300 hover:text-violet-400 transition-colors"
+              className="md:hidden text-general hover:text-violet-400 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -111,7 +135,7 @@ export function Layout({ children }: LayoutProps) {
                   className={`block py-2 transition-colors ${
                     isActive(item.href)
                       ? 'text-violet-400'
-                      : 'text-slate-300 hover:text-violet-400'
+                      : 'text-general hover:text-violet-400'
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -125,7 +149,7 @@ export function Layout({ children }: LayoutProps) {
                 className={`flex items-center gap-2 py-2 transition-colors ${
                   isActive('/lista-desejos')
                     ? 'text-violet-400'
-                    : 'text-slate-300 hover:text-violet-400'
+                    : 'text-general hover:text-violet-400'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -144,7 +168,7 @@ export function Layout({ children }: LayoutProps) {
                 className={`flex items-center gap-2 py-2 transition-colors ${
                   isActive('/carrinho')
                     ? 'text-violet-400'
-                    : 'text-slate-300 hover:text-violet-400'
+                    : 'text-general hover:text-violet-400'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -165,6 +189,17 @@ export function Layout({ children }: LayoutProps) {
       <main className="flex-1">
         {children}
       </main>
+
+      {/* Scroll to Top Button */}
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-14 right-2 z-50 bg-violet-600 hover:bg-violet-700 text-white p-3 rounded-full shadow-lg transition-colors flex items-center justify-center"
+          aria-label="Voltar ao topo"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
 
       <Footer />
     </div>

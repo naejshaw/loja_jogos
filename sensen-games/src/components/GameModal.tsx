@@ -3,6 +3,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useStore } from '../contexts/useStore';
 import { type Game } from '../types';
 import { useState, useRef } from 'react';
+import { resolveMedia } from '../utils/media';
 import {
   Dialog,
   DialogContent,
@@ -23,11 +24,7 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
   const [showVideo, setShowVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const resolveMedia = (s?: string) => {
-    if (!s) return ''
-    if (s.startsWith('/')) return `http://localhost:3001${s}`
-    return s
-  }
+  // use shared resolveMedia util
 
   if (!game) return null;
 
@@ -49,10 +46,10 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-general border-slate-700 text-general">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-violet-300">
+          <DialogTitle className="text-2xl text-primary">
             {game.title}
           </DialogTitle>
-          <DialogDescription className="text-slate-400">
+          <DialogDescription className="text-general">
             {game.description}
           </DialogDescription>
         </DialogHeader>
@@ -62,20 +59,20 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
           <div className="space-y-2">
             <div className="flex gap-2">
               <button
-                className={`px-3 py-1 rounded ${!showVideo ? 'bg-violet-600 text-white' : 'bg-slate-800 text-slate-200'}`}
+                className={`px-3 py-1 rounded ${!showVideo ? 'bg-violet-600 text-white' : 'bg-general text-general'}`}
                 onClick={() => setShowVideo(false)}
               >
                 Ver Imagem
               </button>
               <button
-                className={`px-3 py-1 rounded ${showVideo ? 'bg-violet-600 text-white' : 'bg-slate-800 text-slate-200'}`}
+                className={`px-3 py-1 rounded ${showVideo ? 'bg-violet-600 text-white' : 'bg-general text-general'}`}
                 onClick={() => setShowVideo(true)}
               >
                 Ver Vídeo
               </button>
             </div>
 
-            <div className="aspect-video overflow-hidden rounded-lg bg-slate-800">
+            <div className="aspect-video overflow-hidden rounded-lg bg-general">
               {!showVideo ? (
                 <ImageWithFallback src={imageSrc} alt={game.title} className="w-full h-full object-cover" />
               ) : videoSrc ? (
@@ -88,48 +85,48 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
 
           {/* Info Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-2 bg-slate-800 p-3 rounded-lg">
+            <div className="flex items-center gap-2 bg-general p-3 rounded-lg">
               <Star className="w-5 h-5 text-yellow-400 fill-current" />
               <div>
-                <p className="text-xs text-slate-400">Avaliação</p>
-                <p className="text-slate-100">{game.rating}</p>
+                <p className="text-xs text-general">Avaliação</p>
+                <p className="text-general">{game.rating}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 bg-slate-800 p-3 rounded-lg">
+            <div className="flex items-center gap-2 bg-general p-3 rounded-lg">
               <Calendar className="w-5 h-5 text-violet-400" />
               <div>
-                <p className="text-xs text-slate-400">Lançamento</p>
-                <p className="text-slate-100">{String(game.releaseDate ?? '2024')}</p>
+                <p className="text-xs text-general">Lançamento</p>
+                <p className="text-general">{String(game.releaseDate ?? '2024')}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 bg-slate-800 p-3 rounded-lg">
+            <div className="flex items-center gap-2 bg-general p-3 rounded-lg">
               <Users className="w-5 h-5 text-blue-400" />
               <div>
-                <p className="text-xs text-slate-400">Jogadores</p>
-                <p className="text-slate-100">{game.players || '1'}</p>
+                <p className="text-xs text-general">Jogadores</p>
+                <p className="text-general">{game.players || '1'}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 bg-slate-800 p-3 rounded-lg">
+            <div className="flex items-center gap-2 bg-general p-3 rounded-lg">
               <ShoppingCart className="w-5 h-5 text-green-400" />
               <div>
-                <p className="text-xs text-slate-400">Preço</p>
-                <p className="text-slate-100">{`R$ ${game.price.toFixed(2).replace('.', ',')}`}</p>
+                <p className="text-xs text-general">Preço</p>
+                <p className="text-general">{`R$ ${game.price.toFixed(2).replace('.', ',')}`}</p>
               </div>
             </div>
           </div>
 
           {/* Developer */}
           <div>
-            <h3 className="text-slate-400 text-sm mb-1">Desenvolvedor</h3>
-            <p className="text-slate-100">{game.developer}</p>
+            <h3 className="text-general text-sm mb-1">Desenvolvedor</h3>
+            <p className="text-general">{game.developer}</p>
           </div>
 
           {/* Genres */}
           <div>
-            <h3 className="text-slate-400 text-sm mb-2">Gêneros</h3>
+            <h3 className="text-general text-sm mb-2">Gêneros</h3>
             <div className="flex flex-wrap gap-2">
               {game.genre.map((g) => (
                 <span
@@ -144,29 +141,29 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
 
           {/* Description */}
           <div>
-            <h3 className="text-slate-400 text-sm mb-2">Descrição</h3>
-            <p className="text-slate-300 leading-relaxed">
+            <h3 className="text-general text-sm mb-2">Descrição</h3>
+            <p className="text-general leading-relaxed">
               {game.detailedDescription || game.description}
             </p>
           </div>
 
           {/* Features (Example) */}
           <div>
-            <h3 className="text-slate-400 text-sm mb-2">Características</h3>
+            <h3 className="text-general text-sm mb-2">Características</h3>
             <ul className="space-y-2">
-              <li className="flex items-start gap-2 text-slate-300">
+              <li className="flex items-start gap-2 text-general">
                 <span className="text-violet-400 mt-1">•</span>
                 <span>Gráficos impressionantes e arte única</span>
               </li>
-              <li className="flex items-start gap-2 text-slate-300">
+              <li className="flex items-start gap-2 text-general">
                 <span className="text-violet-400 mt-1">•</span>
                 <span>Jogabilidade envolvente e desafiadora</span>
               </li>
-              <li className="flex items-start gap-2 text-slate-300">
+              <li className="flex items-start gap-2 text-general">
                 <span className="text-violet-400 mt-1">•</span>
                 <span>Trilha sonora original e imersiva</span>
               </li>
-              <li className="flex items-start gap-2 text-slate-300">
+              <li className="flex items-start gap-2 text-general">
                 <span className="text-violet-400 mt-1">•</span>
                 <span>Suporte completo para controles</span>
               </li>
@@ -174,12 +171,12 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
           </div>
 
           {/* System Requirements */}
-          <div className="bg-slate-800 p-4 rounded-lg">
-            <h3 className="text-slate-100 mb-3">Requisitos do Sistema</h3>
+          <div className="bg-general p-4 rounded-lg">
+            <h3 className="text-general mb-3">Requisitos do Sistema</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <h4 className="text-xs text-slate-400 mb-2">MÍNIMO</h4>
-                <ul className="space-y-1 text-sm text-slate-300">
+                <h4 className="text-xs text-general mb-2">MÍNIMO</h4>
+                <ul className="space-y-1 text-sm text-general">
                   <li>OS: Windows 10</li>
                   <li>CPU: Intel i5 ou equivalente</li>
                   <li>RAM: 8 GB</li>
@@ -188,8 +185,8 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
                 </ul>
               </div>
               <div>
-                <h4 className="text-xs text-slate-400 mb-2">RECOMENDADO</h4>
-                <ul className="space-y-1 text-sm text-slate-300">
+                <h4 className="text-xs text-general mb-2">RECOMENDADO</h4>
+                <ul className="space-y-1 text-sm text-general">
                   <li>OS: Windows 11</li>
                   <li>CPU: Intel i7 ou equivalente</li>
                   <li>RAM: 16 GB</li>
@@ -218,7 +215,7 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
               className={`flex-1 px-6 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 ${
                 inWishlist
                   ? 'bg-pink-600 hover:bg-pink-700 text-white'
-                  : 'bg-slate-800 hover:bg-slate-700 text-slate-100'
+                  : 'bg-general hover:opacity-90 text-general'
               }`}
             >
               <Heart className={`w-5 h-5 ${inWishlist ? 'fill-current' : ''}`} />
@@ -231,4 +228,3 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
   );
 }
 // useStore hook provided by contexts/StoreContext
-

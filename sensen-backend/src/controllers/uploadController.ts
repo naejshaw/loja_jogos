@@ -19,7 +19,7 @@ const imageFileFilter = (req: Request, file: Express.Multer.File, cb: multer.Fil
   if (file.mimetype.startsWith('image/')) {
     cb(null, true);
   } else {
-    cb(new Error('Only image files are allowed!'), false);
+    cb(new Error('Only image files are allowed!') as any, false);
   }
 };
 
@@ -28,7 +28,7 @@ const videoFileFilter = (req: Request, file: Express.Multer.File, cb: multer.Fil
   if (file.mimetype.startsWith('video/')) {
     cb(null, true);
   } else {
-    cb(new Error('Only video files are allowed!'), false);
+    cb(new Error('Only video files are allowed!') as any, false);
   }
 };
 

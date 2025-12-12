@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import type { Game } from '../types';
+import { resolveMedia } from '../utils/media';
 
 interface GameCardProps {
   game: Game;
@@ -10,11 +11,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hasVideo = !!game.video && game.video.trim() !== '';
 
-  const resolveMedia = (s?: string) => {
-    if (!s) return ''
-    if (s.startsWith('/')) return `http://localhost:3001${s}`
-    return s
-  }
+  // use resolveMedia util
 
   const handleMouseEnter = () => {
     if (hasVideo) {

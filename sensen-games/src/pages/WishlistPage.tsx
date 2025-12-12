@@ -13,12 +13,12 @@ export function WishlistPage() {
 
   if (wishlist.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen page-bg text-general py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center py-16">
-            <Heart className="w-24 h-24 mx-auto mb-6 text-slate-700" />
-            <h2 className="text-3xl mb-4 text-slate-300">Sua lista de desejos está vazia</h2>
-            <p className="text-slate-400 mb-8">
+            <Heart className="w-24 h-24 mx-auto mb-6 text-primary" />
+            <h2 className="text-3xl mb-4 text-general">Sua lista de desejos está vazia</h2>
+            <p className="text-general mb-8">
               Salve seus jogos favoritos para comprar depois!
             </p>
             <Link
@@ -35,12 +35,12 @@ export function WishlistPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen page-bg text-general py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl mb-4 text-violet-300">Lista de Desejos</h1>
-          <p className="text-slate-300">
+          <h1 className="text-4xl mb-4 text-primary">Lista de Desejos</h1>
+          <p className="text-general">
             {wishlist.length} {wishlist.length === 1 ? 'jogo' : 'jogos'} na sua lista
           </p>
         </div>
@@ -53,10 +53,10 @@ export function WishlistPage() {
             return (
             <div
               key={String(gameKey)}
-              className="bg-slate-900 border border-slate-800 rounded-lg overflow-hidden hover:border-violet-600 transition-all group"
+              className="bg-general border border-slate-800 rounded-lg overflow-hidden hover:border-violet-600 transition-all group"
             >
               {/* Image */}
-              <div className="relative aspect-video overflow-hidden bg-slate-800">
+              <div className="relative aspect-video overflow-hidden bg-general">
               <ImageWithFallback
                 src={game.image}
                 alt={game.title}
@@ -65,7 +65,7 @@ export function WishlistPage() {
               {/* Remove Button */}
               <button
                 onClick={() => removeFromWishlist(game)}
-                className="absolute top-2 right-2 bg-slate-900/80 hover:bg-red-600 text-slate-100 p-2 rounded-full transition-colors"
+                className="absolute top-2 right-2 bg-general hover:bg-red-600 text-general p-2 rounded-full transition-colors"
                 title="Remover da lista de desejos"
               >
                 <Trash2 className="w-4 h-4" />
@@ -82,16 +82,16 @@ export function WishlistPage() {
               {/* Info */}
               <div className="p-5">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl text-slate-100">{game.title}</h3>
+                <h3 className="text-xl text-general">{game.title}</h3>
                 <div className="flex items-center gap-1 text-yellow-400">
                 <Star className="w-4 h-4 fill-current" />
                 <span className="text-sm">{game.rating}</span>
                 </div>
               </div>
 
-              <p className="text-sm text-slate-400 mb-3">{game.developer}</p>
+              <p className="text-sm text-general mb-3">{game.developer}</p>
 
-              <p className="text-slate-300 text-sm mb-4 line-clamp-2">
+              <p className="text-general text-sm mb-4 line-clamp-2">
                 {game.description}
               </p>
 
@@ -99,7 +99,7 @@ export function WishlistPage() {
                 {game.genre.slice(0, 2).map((g: string) => (
                 <span
                   key={g}
-                  className="text-xs badge-primary-soft text-primary px-2 py-1 rounded"
+                  className="inline-block text-xs badge-primary-soft text-primary px-3 py-1 rounded-full"
                 >
                   {g}
                 </span>
@@ -107,7 +107,7 @@ export function WishlistPage() {
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-violet-400">{game.price}</span>
+                <span className="text-violet-400">R$ {(game.price).toFixed(2).replace('.', ',')}</span>
                 <button
                 onClick={() => handleAddToCart(game)}
                 className={`flex items-center gap-2 px-4 py-2 rounded transition-colors ${

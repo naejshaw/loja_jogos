@@ -66,7 +66,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="text-slate-100">
+    <div className="text-general">
       {/* Hero Section */}
       <section
         className="relative h-screen bg-cover bg-center flex items-center justify-center transition-all duration-1000"
@@ -119,7 +119,7 @@ const HomePage = () => {
       {/* Features Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl text-center mb-12 text-violet-300">
+          <h2 className="text-3xl text-center mb-12 text-primary">
             {settings?.homepageFeaturedSectionTitle || 'Por Que Escolher a IndieVerse?'}
           </h2>
           
@@ -128,8 +128,8 @@ const HomePage = () => {
               <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4">
                 <Sparkles className="w-6 h-6 text-violet-400" />
               </div>
-              <h3 className="text-xl mb-3 text-slate-100">Curadoria Especial</h3>
-              <p className="text-slate-400">
+              <h3 className="text-xl mb-3 text-general">Curadoria Especial</h3>
+              <p className="text-general">
                 Selecionamos cuidadosamente cada jogo para garantir qualidade e originalidade.
               </p>
             </div>
@@ -138,8 +138,8 @@ const HomePage = () => {
               <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-violet-400" />
               </div>
-              <h3 className="text-xl mb-3 text-slate-100">Comunidade Ativa</h3>
-              <p className="text-slate-400">
+              <h3 className="text-xl mb-3 text-general">Comunidade Ativa</h3>
+              <p className="text-general">
                 Faça parte de uma comunidade apaixonada por jogos indie e suas histórias únicas.
               </p>
             </div>
@@ -148,8 +148,8 @@ const HomePage = () => {
               <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4">
                 <Trophy className="w-6 h-6 text-violet-400" />
               </div>
-              <h3 className="text-xl mb-3 text-slate-100">Apoio aos Desenvolvedores</h3>
-              <p className="text-slate-400">
+              <h3 className="text-xl mb-3 text-general">Apoio aos Desenvolvedores</h3>
+              <p className="text-general">
                 Comprando aqui, você apoia diretamente os criadores independentes.
               </p>
             </div>
@@ -158,12 +158,12 @@ const HomePage = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-general">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl text-center mb-8 text-violet-300">
+          <h2 className="text-3xl text-center mb-8 text-primary">
             {settings?.homepageAboutUsTitle || 'Sobre a IndieVerse'}
           </h2>
-          <div className="space-y-4 text-slate-300">
+          <div className="space-y-4 text-general">
             <p>
               {settings?.homepageAboutUsText || 'Fundada por entusiastas de jogos indie, a IndieVerse nasceu da paixão por descobrir e compartilhar experiências de jogo únicas e inovadoras. Acreditamos que os melhores jogos nem sempre vêm dos grandes estúdios, mas sim de desenvolvedores independentes com visões criativas e ousadas.'}
             </p>
@@ -177,7 +177,7 @@ const HomePage = () => {
           <h2 className="text-3xl mb-6 text-violet-300">
             Pronto para Começar?
           </h2>
-          <p className="text-xl text-slate-300 mb-8">
+          <p className="text-xl text-general mb-8">
             Explore nosso catálogo e encontre seu próximo jogo favorito.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -189,7 +189,7 @@ const HomePage = () => {
             </Link>
             <Link
               to="/contato"
-              className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-3 rounded-lg transition-colors border border-slate-700"
+              className="bg-general hover:opacity-90 text-general px-8 py-3 rounded-lg transition-colors border border-slate-700"
             >
               Fale Conosco
             </Link>

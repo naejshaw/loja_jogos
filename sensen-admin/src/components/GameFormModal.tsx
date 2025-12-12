@@ -37,14 +37,17 @@ export interface Game { // Exported for potential reuse
     platforms: string[];
     storeLinks: { [key: string]: string };
 }
+
+type GameFormData = Omit<Game, '_id'>;
+
 interface GameFormModalProps {
   open: boolean;
   onClose: () => void;
   onSuccess: () => void; // Generic callback for success
-  gameToEdit?: Game | null; // Optional prop for editing
+  gameToEdit?: Partial<Game> | null; // Optional prop for editing (partial allowed)
 }
 
-const initialFormData = {
+const initialFormData: GameFormData = {
   title: '',
   slug: '',
   image: '',
@@ -53,16 +56,16 @@ const initialFormData = {
   detailedDescription: '',
   developer: '',
   price: 0,
-  genre: [],
+  genre: [] as string[],
   rating: 0,
   releaseDate: '',
   players: '',
-  platforms: [],
-  storeLinks: {},
+  platforms: [] as string[],
+  storeLinks: {} as { [key: string]: string },
 };
 
 const GameFormModal: React.FC<GameFormModalProps> = ({ open, onClose, onSuccess, gameToEdit }) => {
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState<GameFormData>(initialFormData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -87,10 +90,10 @@ const GameFormModal: React.FC<GameFormModalProps> = ({ open, onClose, onSuccess,
   useEffect(() => {
     if (open) {
       if (isEditMode && gameToEdit) {
-        // If editing, populate form with game data
+        // If editing, populate form with game data (gameToEdit may be partial)
         setFormData({
             ...initialFormData,
-            ...gameToEdit,
+            ...(gameToEdit as Partial<GameFormData>),
             releaseDate: gameToEdit.releaseDate ? new Date(gameToEdit.releaseDate).toISOString().split('T')[0] : '', // Format for date input
         });
       } else {
@@ -197,7 +200,7 @@ const GameFormModal: React.FC<GameFormModalProps> = ({ open, onClose, onSuccess,
 
   const handleDeleteStoreLink = (storeNameToDelete: string) => {
     setFormData((prev) => {
-      const newStoreLinks = { ...prev.storeLinks };
+      const newStoreLinks: { [key: string]: string } = { ...prev.storeLinks };
       delete newStoreLinks[storeNameToDelete];
       return { ...prev, storeLinks: newStoreLinks };
     });

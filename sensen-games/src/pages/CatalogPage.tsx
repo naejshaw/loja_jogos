@@ -44,7 +44,11 @@ const CatalogPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedGame(null);
+    // Delay setting selectedGame to null to prevent potential flickering
+    // This allows the modal closing animation to complete smoothly.
+    setTimeout(() => {
+      setSelectedGame(null);
+    }, 300); // Adjust delay as needed, 300ms is a common animation duration
   };
 
   if (settingsLoading || gamesLoading) {
@@ -56,11 +60,11 @@ const CatalogPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen page-bg text-general py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl mb-4 text-violet-300">{settings?.catalogPageTitle || 'Catálogo de Jogos'}</h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+          <h1 className="text-4xl mb-4 text-primary">{settings?.catalogPageTitle || 'Catálogo de Jogos'}</h1>
+          <p className="text-xl text-general max-w-2xl mx-auto">
             Explore nossa seleção curada de jogos indie incríveis
           </p>
         </div>
@@ -68,7 +72,7 @@ const CatalogPage = () => {
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Tag className="w-5 h-5 text-violet-400" />
-            <span className="text-slate-300">Filtrar por gênero:</span>
+            <span className="text-general">Filtrar por gênero:</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {allGenres.map((genre) => (
@@ -77,8 +81,8 @@ const CatalogPage = () => {
                 onClick={() => setSelectedGenre(genre)}
                 className={`px-4 py-2 rounded-lg transition-colors ${
                   selectedGenre === genre
-                    ? 'bg-violet-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      ? 'bg-violet-600 text-white'
+                      : 'bg-general text-general hover:opacity-90'
                 }`}
               >
                 {genre}
@@ -91,10 +95,10 @@ const CatalogPage = () => {
           {filteredGames.map((game) => (
             <div
               key={game._id}
-              className="bg-slate-900 border border-slate-800 rounded-lg overflow-hidden hover:border-violet-600 transition-all hover:scale-105 cursor-pointer"
+              className="bg-general border border-slate-800 rounded-lg overflow-hidden hover:border-violet-600 transition-all hover:scale-105 cursor-pointer"
               onClick={() => handleGameClick(game)}
             >
-              <div className="aspect-video overflow-hidden bg-slate-800">
+              <div className="aspect-video overflow-hidden bg-general">
                 <ImageWithFallback
                   src={'http://localhost:3001' + game.image}
                   alt={game.title}
@@ -104,16 +108,16 @@ const CatalogPage = () => {
               
               <div className="p-5">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl text-slate-100">{game.title}</h3>
+                  <h3 className="text-xl text-general">{game.title}</h3>
                   <div className="flex items-center gap-1 text-yellow-400">
                     <Star className="w-4 h-4 fill-current" />
                     <span className="text-sm">{game.rating}</span>
                   </div>
                 </div>
                 
-                <p className="text-sm text-slate-400 mb-3">{game.developer}</p>
+                <p className="text-sm text-general mb-3">{game.developer}</p>
                 
-                <p className="text-slate-300 text-sm mb-4">{game.description}</p>
+                <p className="text-general text-sm mb-4">{game.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {game.genre.map((g) => (
@@ -145,7 +149,7 @@ const CatalogPage = () => {
 
         {filteredGames.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-slate-400 text-xl">
+            <p className="text-general text-xl">
               Nenhum jogo encontrado para este gênero.
             </p>
           </div>
