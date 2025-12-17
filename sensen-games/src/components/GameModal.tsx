@@ -97,7 +97,7 @@ export function GameModal({ game, isOpen, onClose }: GameModalProps) {
               <Calendar className="w-5 h-5 text-violet-400" />
               <div>
                 <p className="text-xs text-general">Lançamento</p>
-                <p className="text-general">{String(game.releaseDate ?? '2024')}</p>
+                <p className="text-general">{String(game.releaseDate ?? '2024').slice(0, 10)}</p>
               </div>
             </div>
 

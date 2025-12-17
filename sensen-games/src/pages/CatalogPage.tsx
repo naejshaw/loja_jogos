@@ -123,7 +123,10 @@ const CatalogPage = () => {
                   {game.genre.map((g) => (
                     <span
                       key={g}
-                      className="text-xs badge-primary-soft text-primary px-2 py-1 rounded"
+                      className="text-xs badge-primary-soft text-primary px-2 py-1 rounded bg-general-text-color"
+                      style={{
+                        backgroundColor: `var(--header-background-color)`,
+                      }}
                     >
                       {g}
                     </span>

@@ -154,7 +154,7 @@ const GamePage = () => {
               <Calendar className="w-6 h-6 text-violet-400" />
               <div>
                 <p className="text-sm text-general">Lançamento</p>
-                <p className="text-general text-lg font-semibold">{String(game.releaseDate ?? '2024')}</p>
+                <p className="text-general text-lg font-semibold">{String(game.releaseDate ?? '2024').slice(0, 10)}</p>
               </div>
             </div>
 
